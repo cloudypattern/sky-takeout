@@ -1,5 +1,6 @@
 package com.sky.service.impl;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.dto.EmployeeLoginDTO;
@@ -9,10 +10,12 @@ import com.sky.exception.AccountNotFoundException;
 import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.service.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+@Slf4j
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -25,7 +28,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeeLoginDTO
      * @return
      */
+//    @DS("slave") 登录方法通常走主库，所以注释掉。默认走主库
     public Employee login(EmployeeLoginDTO employeeLoginDTO) {
+        log.info("========== 本次查询走了 SLAVE 从库 ==========");
         String username = employeeLoginDTO.getUsername();
         String password = employeeLoginDTO.getPassword();
 

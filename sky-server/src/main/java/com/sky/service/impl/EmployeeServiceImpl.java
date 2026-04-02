@@ -1,6 +1,7 @@
 package com.sky.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
@@ -10,6 +11,7 @@ import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
 import com.sky.exception.AccountNotFoundException;
@@ -146,6 +148,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        employee.setUpdateUser(BaseContext.getCurrentId());
 
         employeeMapper.update(employee);
+    }
+
+    /**
+     * 修改员工密码
+     * @param passwordEditDTO
+     */
+    @Override
+    public void editPassword(PasswordEditDTO passwordEditDTO) {
+//        Employee employee = employeeMapper.getById(BaseContext.getCurrentId());
+        Employee employee = employeeMapper.getById(passwordEditDTO.getEmpId());
+        String originalPassword = employee.getPassword();
+        String oldPassword = DigestUtils.md5DigestAsHex(passwordEditDTO.getOldPassword().getBytes());
+        if (!oldPassword.equals(originalPassword)) {
+            //密码错误
+            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
+        }else {
+            String newPassword = passwordEditDTO.getNewPassword();
+            String password = DigestUtils.md5DigestAsHex(newPassword.getBytes());
+            employee.setPassword(password);
+            employeeMapper.update(employee);
+        }
     }
 
 }

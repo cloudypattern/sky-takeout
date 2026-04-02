@@ -7,6 +7,8 @@ spring:
   main:
     allow-circular-references: true
   datasource:
+    druid:
+      remove-abandoned: false
     dynamic:
       primary: master
       strict: false

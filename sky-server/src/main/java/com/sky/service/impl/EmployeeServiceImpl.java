@@ -156,8 +156,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public void editPassword(PasswordEditDTO passwordEditDTO) {
-//        Employee employee = employeeMapper.getById(BaseContext.getCurrentId());
-        Employee employee = employeeMapper.getById(passwordEditDTO.getEmpId());
+        Employee employee = employeeMapper.getById(BaseContext.getCurrentId());
+//        Employee employee = employeeMapper.getById(passwordEditDTO.getEmpId());
         String originalPassword = employee.getPassword();
         String oldPassword = DigestUtils.md5DigestAsHex(passwordEditDTO.getOldPassword().getBytes());
         if (!oldPassword.equals(originalPassword)) {

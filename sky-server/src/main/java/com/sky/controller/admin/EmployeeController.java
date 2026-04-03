@@ -4,7 +4,10 @@ import com.sky.constant.JwtClaimsConstant;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+<<<<<<< HEAD
 import com.sky.dto.PasswordEditDTO;
+=======
+>>>>>>> github/main
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
 import com.sky.result.PageResult;
@@ -114,6 +117,7 @@ public class EmployeeController {
         return Result.success();
 
     }
+<<<<<<< HEAD
 
     /**
      * 修改员工密码
@@ -126,4 +130,6 @@ public class EmployeeController {
         return Result.success();
     }
 
+=======
+>>>>>>> github/main
 }

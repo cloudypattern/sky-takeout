@@ -1,7 +1,10 @@
 package com.sky.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
+<<<<<<< HEAD
 import com.fasterxml.jackson.databind.ser.Serializers;
+=======
+>>>>>>> github/main
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
@@ -11,7 +14,10 @@ import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+<<<<<<< HEAD
 import com.sky.dto.PasswordEditDTO;
+=======
+>>>>>>> github/main
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
 import com.sky.exception.AccountNotFoundException;
@@ -150,6 +156,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.update(employee);
     }
 
+<<<<<<< HEAD
     /**
      * 修改员工密码
      * @param passwordEditDTO
@@ -171,4 +178,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+=======
+>>>>>>> github/main
 }

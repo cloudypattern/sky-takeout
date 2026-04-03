@@ -1,5 +1,6 @@
 package com.sky.mapper;
 
+<<<<<<< HEAD
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
 import com.sky.dto.DishPageQueryDTO;
@@ -8,6 +9,9 @@ import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+=======
+import org.apache.ibatis.annotations.Mapper;
+>>>>>>> github/main
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
@@ -21,6 +25,7 @@ public interface DishMapper {
     @Select("select count(id) from dish where category_id = #{categoryId}")
     Integer countByCategoryId(Long categoryId);
 
+<<<<<<< HEAD
     /**
      * 菜品分页查询
      * @param dishPageQueryDTO
@@ -47,4 +52,6 @@ public interface DishMapper {
 
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
+=======
+>>>>>>> github/main
 }

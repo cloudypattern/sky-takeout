@@ -3,10 +3,7 @@ package com.sky.service;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
-<<<<<<< HEAD
 import com.sky.dto.PasswordEditDTO;
-=======
->>>>>>> github/main
 import com.sky.entity.Employee;
 import com.sky.result.PageResult;
 
@@ -51,13 +48,10 @@ public interface EmployeeService {
      * @param employeeDTO
      */
     void update(EmployeeDTO employeeDTO);
-<<<<<<< HEAD
 
     /**
      * 修改员工密码
      * @param passwordEditDTO
      */
     void editPassword(PasswordEditDTO passwordEditDTO);
-=======
->>>>>>> github/main
 }

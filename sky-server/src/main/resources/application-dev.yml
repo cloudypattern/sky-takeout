@@ -10,3 +10,8 @@ sky:
     slave:
       host: 192.168.255.128
       port: 3306
+  alioss:
+    endpoint: oss-cn-guangzhou.aliyuncs.com
+    access-key-id: ${ALIOSS_ACCESS_KEY_ID}
+    access-key-secret: ${ALIOSS_ACCESS_KEY_SECRET}
+    bucket-name: sky-takeout-liuyu77

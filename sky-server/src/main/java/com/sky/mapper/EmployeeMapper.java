@@ -2,19 +2,11 @@ package com.sky.mapper;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
-<<<<<<< HEAD
-import com.sky.dto.EmployeeDTO;
-=======
->>>>>>> github/main
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-<<<<<<< HEAD
-import org.apache.ibatis.annotations.Update;
-=======
->>>>>>> github/main
 
 @Mapper
 public interface EmployeeMapper {
@@ -39,7 +31,6 @@ public interface EmployeeMapper {
     @AutoFill(value = OperationType.UPDATE)
     void update(Employee employee);
 
-<<<<<<< HEAD
     /**
      * 根据id查询员工信息
      * @param id
@@ -48,8 +39,4 @@ public interface EmployeeMapper {
     @Select("select * from employee where id = #{id}")
     Employee getById(Long id);
 
-=======
-    @Select("select * from employee where id = #{id}")
-    Employee getById(Long id);
->>>>>>> github/main
 }

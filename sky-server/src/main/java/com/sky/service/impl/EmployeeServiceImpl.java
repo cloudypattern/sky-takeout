@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeeLoginDTO
      * @return
      */
-//    @DS("slave") 登录方法通常走主库，所以注释掉。默认走主库
+//    //    @DS("slave") 登录方法通常走主库，所以注释掉。默认走主库
     @Override
     public Employee login(EmployeeLoginDTO employeeLoginDTO) {
         String username = employeeLoginDTO.getUsername();
@@ -96,8 +96,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeePageQueryDTO
      * @return
      */
-//    @DS("slave") 从库 192.168.0.103 连不上，暂时注释掉，走主库
-    @DS("slave")
+    //    @DS("slave") 从库 192.168.0.103 连不上，暂时注释掉，走主库
+    //    @DS("slave")
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
@@ -126,7 +126,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param id
      * @return
      */
-    @DS("slave")
+    //    @DS("slave")
     @Override
     public Employee getById(Long id) {
         Employee employee = employeeMapper.getById(id);

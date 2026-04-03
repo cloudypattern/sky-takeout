@@ -34,7 +34,7 @@ public class DishServiceImpl implements DishService{
      * @return
      */
     @Override
-    @DS("slave")
+//    //    @DS("slave")
     public PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO) {
         PageHelper.startPage(dishPageQueryDTO.getPage(),dishPageQueryDTO.getPageSize());
         Page<Dish> page = dishMapper.pageQuery(dishPageQueryDTO);
@@ -46,7 +46,7 @@ public class DishServiceImpl implements DishService{
     }
 
     @Override
-    @DS("slave")
+    //    @DS("slave")
     public DishVO getByIdWithFlavor(Long id) {
         Dish dish = dishMapper.getById(id);
 
@@ -108,5 +108,12 @@ public class DishServiceImpl implements DishService{
                 .id(id)
                 .build();
         dishMapper.update(dish);
+    }
+
+    @Override
+    public List<DishVO> list(Long categoryId) {
+        List<DishVO> dishVOList = dishMapper.list(categoryId);
+        return dishVOList;
+
     }
 }

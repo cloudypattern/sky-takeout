@@ -62,7 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param categoryPageQueryDTO
      * @return
      */
-    @DS("slave")
+    //    @DS("slave")
     public PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO) {
         PageHelper.startPage(categoryPageQueryDTO.getPage(),categoryPageQueryDTO.getPageSize());
         //下一条sql进行分页，自动加入limit关键字分页
@@ -128,7 +128,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param type
      * @return
      */
-    @DS("slave")
+    //    @DS("slave")
     public List<Category> list(Integer type) {
         return categoryMapper.list(type);
     }

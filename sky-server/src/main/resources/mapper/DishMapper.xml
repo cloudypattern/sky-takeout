@@ -53,6 +53,13 @@
         </where>
         order by create_time desc
     </select>
+    <select id="list" resultType="com.sky.vo.DishVO">
+        select * from dish where status = 1
+        <if test="categoryId != null">
+            and category_id = #{categoryId}
+        </if>
+        order by create_time desc
+    </select>
 
     <insert id="insert" parameterType="com.sky.entity.Dish" useGeneratedKeys="true" keyProperty="id">
         insert into dish

@@ -1,14 +1,20 @@
 package com.sky.config;
 
 import com.sky.interceptor.JwtTokenAdminInterceptor;
+import com.sky.interceptor.JwtTokenUserInterceptor;
 import com.sky.json.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -21,16 +27,43 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
 
+    @Autowired
+    private JwtTokenUserInterceptor jwtTokenUserInterceptor;
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    /**
+     * 添加日期转换器
+     * @param registry
+     */
+    @Override
+    protected void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new Converter<String, LocalDateTime>() {
+            @Override
+            public LocalDateTime convert(String source) {
+                if (source == null || source.trim().isEmpty()) {
+                    return null;
+                }
+                return LocalDateTime.parse(source, FORMATTER);
+            }
+        });
+    }
+
     /**
      * 注册自定义拦截器
      *
      * @param registry
      */
     protected void addInterceptors(InterceptorRegistry registry) {
+
         log.info("开始注册自定义拦截器...");
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
+
+        registry.addInterceptor(jwtTokenUserInterceptor)
+                .addPathPatterns("/user/**")
+                .excludePathPatterns("/user/user/login","/user/shop/status");
     }
 
     /**

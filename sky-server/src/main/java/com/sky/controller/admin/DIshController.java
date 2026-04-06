@@ -8,9 +8,11 @@ import com.sky.result.Result;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/admin/dish")
@@ -18,6 +20,9 @@ public class DIshController {
 
     @Autowired
     private DishService dishService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 菜品管理分页查询
@@ -51,6 +56,8 @@ public class DIshController {
 
         dishService.save(dishDTO);
 
+        deleteCache("dish_" + dishDTO.getCategoryId());
+
         return Result.success();
     }
 
@@ -62,6 +69,7 @@ public class DIshController {
     @DeleteMapping
     public Result drop(String[] ids){
         dishService.drop(ids);
+        deleteCache("dish_*");
         return Result.success();
     }
 
@@ -73,12 +81,14 @@ public class DIshController {
     @PutMapping
     public Result alterDish(@RequestBody DishDTO dishDTO){
         dishService.alterDish(dishDTO);
+        deleteCache("dish_*");
         return Result.success();
     }
 
     @PostMapping("/status/{status}")
     public Result startOrStop(@PathVariable Integer status, Long id){
         dishService.startOrStop(status,id);
+        deleteCache("dish_*");
         return Result.success();
     }
 
@@ -88,6 +98,11 @@ public class DIshController {
         List<DishVO> dishes = dishService.list(categoryId);
 
         return Result.success(dishes);
+    }
+
+    private void deleteCache(String pattern){
+        Set keys = redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
     }
 
 }
